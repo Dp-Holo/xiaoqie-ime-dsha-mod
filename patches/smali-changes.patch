@@ -1,0 +1,532 @@
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -294,6 +294,8 @@
+     .line 1
+     invoke-super {p0}, Landroid/app/Application;->onCreate()V
+ 
++    invoke-static {p0}, Lorg/fcitx/fcitx5/android/mod/ModRestore;->restoreIfNeeded(Landroid/content/Context;)V
++
+     .line 2
+     .line 3
+     .line 4
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -615,7 +615,7 @@
+ 
+     .line 234
+     .line 235
+-    move/from16 v33, v31
++    const/16 v33, 0x3
+ 
+     .line 236
+     .line 237
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -337,6 +337,17 @@
+     invoke-virtual {v1, p0}, Lorg/fcitx/fcitx5/android/input/keyboard/CustomGestureView;->setOnGestureListener(Lorg/fcitx/fcitx5/android/input/keyboard/CustomGestureView$OnGestureListener;)V
+ 
+     .line 147
++    const/4 v2, 0x1
++
++    invoke-virtual {v1, v2}, Lorg/fcitx/fcitx5/android/input/keyboard/CustomGestureView;->setDoubleTapEnabled(Z)V
++
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/ModExtras;->clearPreeditOnDoubleTap()Lkotlin/jvm/functions/Function1;
++
++    move-result-object v2
++
++    invoke-virtual {v1, v2}, Lorg/fcitx/fcitx5/android/input/keyboard/CustomGestureView;->setOnDoubleTapListener(Lkotlin/jvm/functions/Function1;)V
++
++    .line 147
+     .line 148
+     .line 149
+     return-object v0
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -520,7 +520,7 @@
+ 
+     .line 48
+     .line 49
+-    iget-object p1, p1, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;->action:Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;
++    iget-object p1, p1, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;->action:Lsplitties/resources/DimenResourcesKt;
+ 
+     .line 50
+     .line 51
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -64,7 +64,7 @@
+ 
+     const v4, 0x3dcccccd    # 0.1f
+ 
+-    const/4 v5, 0x3
++    const/4 v5, 0x2
+ 
+     const/4 v7, 0x0
+ 
+@@ -225,7 +225,7 @@
+     .line 25
+     .line 26
+     .line 27
+-    invoke-direct {v2, v3}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;-><init>(Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;)V
++    invoke-direct {v2, v3}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;-><init>(Lsplitties/resources/DimenResourcesKt;)V
+ 
+     .line 28
+     .line 29
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -4,11 +4,11 @@
+ 
+ 
+ # instance fields
+-.field public final action:Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;
++.field public final action:Lsplitties/resources/DimenResourcesKt;
+ 
+ 
+ # direct methods
+-.method public constructor <init>(Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;)V
++.method public constructor <init>(Lsplitties/resources/DimenResourcesKt;)V
+     .locals 0
+ 
+     .line 1
+@@ -17,7 +17,7 @@
+     .line 2
+     .line 3
+     .line 4
+-    iput-object p1, p0, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;->action:Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;
++    iput-object p1, p0, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;->action:Lsplitties/resources/DimenResourcesKt;
+ 
+     .line 5
+     .line 6
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -1268,44 +1268,15 @@
+ 
+     .line 609
+     .line 610
+-    new-instance v30, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$Text;
++    new-instance v30, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$AltText;
+ 
+-    .line 611
+-    .line 612
+-    const/16 v39, 0x1e4
+-
+-    .line 613
+-    .line 614
+-    const/16 v36, 0x0
+-
+-    .line 615
+-    .line 616
+-    const-string v31, "."
+-
+-    .line 617
+-    .line 618
+-    const/high16 v32, 0x41b80000    # 23.0f
+-
+-    .line 619
+-    .line 620
+-    const/16 v33, 0x0
+-
+-    .line 621
+-    .line 622
+-    const v34, 0x3dcccccd    # 0.1f
+-
+-    .line 623
+-    .line 624
+-    .line 625
+-    const/16 v37, 0x0
+-
+-    .line 626
+-    .line 627
+-    const/16 v38, 0x0
+-
+-    .line 628
+-    .line 629
+-    invoke-direct/range {v30 .. v39}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$Text;-><init>(Ljava/lang/String;FIFIIZII)V
++    const-string v31, ","
++
++    const/16 v32, 0x3
++
++    const-string v33, "."
++
++    invoke-direct/range {v30 .. v33}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$AltText;-><init>(Ljava/lang/String;ILjava/lang/String;)V
+ 
+     .line 630
+     .line 631
+@@ -1333,22 +1304,43 @@
+     .line 643
+     invoke-direct {v11, v12}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Press;-><init>(Lsplitties/resources/DimenResourcesKt;)V
+ 
+-    .line 644
+-    .line 645
+-    .line 646
+-    invoke-static {v11}, Ljava/util/Collections;->singleton(Ljava/lang/Object;)Ljava/util/Set;
+-
+-    .line 647
+-    .line 648
+-    .line 649
+-    move-result-object v11
+-
+-    .line 650
+-    new-instance v12, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Popup$Preview;
+-
+-    .line 651
+-    .line 652
+-    invoke-direct {v12, v9}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Popup$Preview;-><init>(Ljava/lang/String;)V
++    new-instance v12, Ljava/util/LinkedHashSet;
++
++    invoke-direct {v12}, Ljava/util/LinkedHashSet;-><init>()V
++
++    invoke-virtual {v12, v11}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
++
++    new-instance v13, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;
++
++    const-string v14, "."
++
++    invoke-direct {v13, v14}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;-><init>(Ljava/lang/String;)V
++
++    new-instance v14, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;
++
++    invoke-direct {v14, v13}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;-><init>(Lsplitties/resources/DimenResourcesKt;)V
++
++    invoke-virtual {v12, v14}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
++
++    new-instance v13, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$LongPress;
++
++    new-instance v14, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;
++
++    const-string v15, "."
++
++    invoke-direct {v14, v15}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$FcitxKeyAction;-><init>(Ljava/lang/String;)V
++
++    invoke-direct {v13, v14}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$LongPress;-><init>(Lsplitties/resources/DimenResourcesKt;)V
++
++    invoke-virtual {v12, v13}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
++
++    move-object v11, v12
++
++    new-instance v12, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Popup$AltPreview;
++
++    const-string v13, "."
++
++    invoke-direct {v12, v9, v13}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Popup$AltPreview;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+ 
+     .line 653
+     .line 654
+@@ -1397,32 +1389,33 @@
+     .line 677
+     const/4 v11, 0x6
+ 
+-    .line 678
+     new-array v11, v11, [Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
+ 
+-    .line 679
+-    .line 680
+-    aput-object v4, v11, v22
+-
+-    .line 681
+-    .line 682
+-    aput-object v5, v11, v14
+-
+-    .line 683
+-    .line 684
+-    aput-object v1, v11, v9
+-
+-    .line 685
+-    .line 686
+-    aput-object v6, v11, v2
+-
+-    .line 687
+-    .line 688
+-    aput-object v7, v11, v19
+-
+-    .line 689
+-    .line 690
+-    aput-object v8, v11, v16
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/KeyFactory;->numberKey()Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
++
++    move-result-object v13
++
++    const/4 v12, 0x0
++    aput-object v13, v11, v12
++
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/KeyFactory;->emojiKey()Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
++
++    move-result-object v13
++
++    const/4 v12, 0x1
++    aput-object v13, v11, v12
++
++    const/4 v12, 0x2
++    aput-object v1, v11, v12
++
++    const/4 v12, 0x3
++    aput-object v6, v11, v12
++
++    const/4 v12, 0x4
++    aput-object v7, v11, v12
++
++    const/4 v12, 0x5
++    aput-object v8, v11, v12
+ 
+     .line 691
+     .line 692
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -90,14 +90,14 @@
+     const/4 v0, 0x1
+ 
+     .line 41
+-    aput-object v1, v2, v0
++    aput-object p3, v2, v0
+ 
+     .line 42
+     .line 43
+     const/4 v0, 0x2
+ 
+     .line 44
+-    aput-object p3, v2, v0
++    aput-object v1, v2, v0
+ 
+     .line 45
+     .line 46
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -496,36 +496,16 @@
+ 
+     .line 229
+     .line 230
+-    iget-object p1, p0, Lorg/fcitx/fcitx5/android/input/keyboard/CommonKeyActionListener;->fcitx$delegate:Lkotlin/SynchronizedLazyImpl;
++    invoke-virtual {p0}, Lorg/fcitx/fcitx5/android/input/keyboard/CommonKeyActionListener;->getService$2()Lorg/fcitx/fcitx5/android/input/FcitxInputMethodService;
+ 
+     .line 231
++    move-result-object p0
++
+     .line 232
+-    invoke-virtual {p1}, Lkotlin/SynchronizedLazyImpl;->getValue()Ljava/lang/Object;
++    invoke-static {p0}, Lorg/fcitx/fcitx5/android/mod/ModExtras;->showSystemImPicker(Landroid/content/Context;)V
+ 
+     .line 233
+     .line 234
+-    .line 235
+-    move-result-object p1
+-
+-    .line 236
+-    check-cast p1, Lorg/fcitx/fcitx5/android/daemon/FcitxConnection;
+-
+-    .line 237
+-    .line 238
+-    new-instance p2, Lorg/fcitx/fcitx5/android/input/InputView$1;
+-
+-    .line 239
+-    .line 240
+-    invoke-direct {p2, p0, v2, v3}, Lorg/fcitx/fcitx5/android/input/InputView$1;-><init>(Ljava/lang/Object;Lkotlin/coroutines/Continuation;I)V
+-
+-    .line 241
+-    .line 242
+-    .line 243
+-    invoke-static {p1, p2}, Lkotlinx/serialization/json/JsonKt;->launchOnReady(Lorg/fcitx/fcitx5/android/daemon/FcitxConnection;Lkotlin/jvm/functions/Function3;)V
+-
+-    .line 244
+-    .line 245
+-    .line 246
+     goto/16 :goto_6
+ 
+     .line 247
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -245,6 +245,16 @@
+     .line 101
+     if-eq p1, p2, :cond_4
+ 
++    const/16 p2, 0x1f4
++
++    if-ne p1, p2, :cond_not500
++
++    const-string p1, ""
++
++    goto :goto_1
++
++    :cond_not500
++
+     .line 102
+     .line 103
+     invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -2560,6 +2560,20 @@
+ .method public static toast(Landroid/content/Context;Ljava/lang/String;)V
+     .locals 3
+ 
++    if-eqz p1, :hw_check
++
++    return-void
++
++    :hw_check
++    invoke-virtual {p1}, Ljava/lang/String;->isEmpty()Z
++
++    move-result v0
++
++    if-eqz v0, :hw_go
++
++    return-void
++
++    :hw_go
+     .line 1
+     :try_start_0
+     invoke-static {p0}, Landroidx/core/os/BundleCompat;->getMainExecutor(Landroid/content/Context;)Ljava/util/concurrent/Executor;
+diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
+--- a/smali
++++ b/smali
+@@ -0,0 +1,142 @@
++.class public final Lorg/fcitx/fcitx5/android/mod/KeyFactory;
++.super Ljava/lang/Object;
++
++
++# direct methods
++.method public constructor <init>()V
++    .locals 0
++
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++
++# static methods
++.method public static emojiKey()Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
++    .locals 10
++
++    # 外观：颜文字文字键，规范同 TextPickerSwitchKey（16sp 粗体、AltForeground、0.1 宽）
++    new-instance v0, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$Text;
++
++    const-string v1, ":-)"
++
++    const/high16 v2, 0x41800000    # 16.0f
++
++    const/4 v3, 0x1
++
++    const v4, 0x3dcccccd    # 0.1f
++
++    const/4 v5, 0x3
++
++    const/4 v6, 0x0
++
++    const/4 v7, 0x1
++
++    const/4 v8, -0x1
++
++    const/16 v9, 0x1e4
++
++    invoke-direct/range {v0 .. v9}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$Text;-><init>(Ljava/lang/String;FIFIIZII)V
++
++    # 行为：点击打开颜文字面板
++    new-instance v2, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Press;
++
++    new-instance v3, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$PickerSwitchAction;
++
++    sget-object v4, Lorg/fcitx/fcitx5/android/input/picker/PickerWindow$Key;->Emoticon:Lorg/fcitx/fcitx5/android/input/picker/PickerWindow$Key;
++
++    invoke-direct {v3, v4}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$PickerSwitchAction;-><init>(Lorg/fcitx/fcitx5/android/input/picker/PickerWindow$Key;)V
++
++    invoke-direct {v2, v3}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Press;-><init>(Lsplitties/resources/DimenResourcesKt;)V
++
++    invoke-static {v2}, Ljava/util/Collections;->singleton(Ljava/lang/Object;)Ljava/util/Set;
++
++    move-result-object v1
++
++    const/4 v2, 0x0
++
++    new-instance v4, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
++
++    invoke-direct {v4, v0, v1, v2}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;-><init>(Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance;Ljava/util/Set;[Lkotlinx/serialization/json/JsonKt;)V
++
++    return-object v4
++.end method
++
++.method public static numberKey()Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
++    .locals 10
++
++    # 外观：与 LayoutSwitchKey 规范一致（16sp 粗体、0.15 宽、AltForeground）
++    new-instance v0, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$Text;
++
++    const-string v1, "?123"
++
++    const/high16 v2, 0x41800000    # 16.0f
++
++    const/4 v3, 0x1
++
++    const v4, 0x3e19999a    # 0.15f
++
++    const/4 v5, 0x3
++
++    const/4 v6, 0x0
++
++    const/4 v7, 0x1
++
++    const/4 v8, -0x1
++
++    const/16 v9, 0x1e4
++
++    invoke-direct/range {v0 .. v9}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance$Text;-><init>(Ljava/lang/String;FIFIIZII)V
++
++    new-instance v1, Ljava/util/LinkedHashSet;
++
++    invoke-direct {v1}, Ljava/util/LinkedHashSet;-><init>()V
++
++    # 单击：数字键盘（显式指定，避免 lastSymbolType 记忆导致进入符号面板）
++    new-instance v2, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Press;
++
++    new-instance v3, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$LayoutSwitchAction;
++
++    const-string v4, "Number"
++
++    invoke-direct {v3, v4}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$LayoutSwitchAction;-><init>(Ljava/lang/String;)V
++
++    invoke-direct {v2, v3}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Press;-><init>(Lsplitties/resources/DimenResourcesKt;)V
++
++    invoke-virtual {v1, v2}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
++
++    # 长按：符号面板
++    new-instance v2, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$LongPress;
++
++    new-instance v3, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$LayoutSwitchAction;
++
++    const-string v4, "Symbol"
++
++    invoke-direct {v3, v4}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$LayoutSwitchAction;-><init>(Ljava/lang/String;)V
++
++    invoke-direct {v2, v3}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$LongPress;-><init>(Lsplitties/resources/DimenResourcesKt;)V
++
++    invoke-virtual {v1, v2}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
++
++    # 上划：符号面板
++    new-instance v2, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;
++
++    new-instance v3, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$LayoutSwitchAction;
++
++    const-string v4, "Symbol"
++
++    invoke-direct {v3, v4}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyAction$LayoutSwitchAction;-><init>(Ljava/lang/String;)V
++
++    invoke-direct {v2, v3}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe;-><init>(Lsplitties/resources/DimenResourcesKt;)V
++
++    invoke-virtual {v1, v2}, Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z
++
++    const/4 v2, 0x0
++
++    new-instance v3, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;
++
++    invoke-direct {v3, v0, v1, v2}, Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef;-><init>(Lorg/fcitx/fcitx5/android/input/keyboard/KeyDef$Appearance;Ljava/util/Set;[Lkotlinx/serialization/json/JsonKt;)V
++
++    return-object v3
++.end method
