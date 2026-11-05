@@ -59,7 +59,28 @@
   `/sdcard/Android/media/<包名>/backup` → `/sdcard/Download/fcitx-backup`
 - **注意**：卸载会清空应用私有数据；`Download/fcitx-backup` 不受影响。
 
+## 8. 计算器候选（1.1.0 新增）
+
+- **行为**：输入形如 `2+4` 的算式（结尾），候选栏顶部居中显示 `=6`；点选上屏，**长按结果**切换"带 =/纯数字"并持久保存
+- **实现**：`mod/ModCalc`（表达式解析 + 候选页切换 + 长按切换 + SharedPreferences）
+  - `InputView` 的 `InputPanelEvent` 分支记录 `preedit`
+  - `HorizontalCandidateComponent` 设置候选数组时调用 `ModCalc.decorate`，可追加一条真实候选
+  - `FcitxInputMethodService.commitText` 触发刷新；候选栏 `ViewAnimator` 切到候选页显示结果
+- **注意**：拼音预输入存在时不显示（避免与真实候选抢位置）
+
+## 9. 长按退格加速（1.1.0 新增）
+
+- **行为**：按住退格连续删除，间隔从 50ms 递减到 15ms
+- **实现**：`PageFetcher$flow$1` 里的重复间隔常量替换为 `mod/ModRepeat.nextDelay()`
+- **注意**：该间隔对所有使用 `Repeat` 行为的按键生效
+
+## 10. 空闲看门狗（1.1.0 新增，内部机制）
+
+- `mod/ModWatchdog`：每 5 分钟用 `Process.getElapsedCpuTime()` 采样一次；键盘不可见且 CPU ≥30% 连续 2 次时做软重置，再持续 2 次才重启进程
+- 正常运行几乎零开销；日志只在异常时写入 `files/mod-watchdog.log`
+
 ## 杂项
 
 - `PickerLayout$Keyboard.smali`、`CapsKey.smali`：面板底部按键的排列/配色微调。
+- `InputView.smali`：`v33` 常量改为 `3`（早期 `:-)` 表情/文字切换键的变体参数），未在上文单列。
 - `link/AsrkbSpeechClient*.smali`：回调错误提示的一处静默处理。

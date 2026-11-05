@@ -1,6 +1,20 @@
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/androidx/paging/PageFetcher$flow$1.smali b/smali/androidx/paging/PageFetcher$flow$1.smali
+--- a/smali/androidx/paging/PageFetcher$flow$1.smali	2026-10-24 03:43:04.393995682 +0000
++++ b/smali/androidx/paging/PageFetcher$flow$1.smali	2026-11-03 02:54:20.688230441 +0000
+@@ -3433,7 +3433,9 @@
+     .line 653
+     .line 654
+     :cond_20
+-    const-wide/16 v5, 0x32
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/ModRepeat;->nextDelay()J
++
++    move-result-wide v5
+ 
+     .line 655
+     .line 656
+diff -ruN a/smali/org/fcitx/fcitx5/android/FcitxApplication.smali b/smali/org/fcitx/fcitx5/android/FcitxApplication.smali
+--- a/smali/org/fcitx/fcitx5/android/FcitxApplication.smali	2026-10-24 03:43:15.189995677 +0000
++++ b/smali/org/fcitx/fcitx5/android/FcitxApplication.smali	2026-10-23 17:30:29.389614605 +0000
 @@ -294,6 +294,8 @@
      .line 1
      invoke-super {p0}, Landroid/app/Application;->onCreate()V
@@ -10,9 +24,39 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
      .line 2
      .line 3
      .line 4
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/FcitxInputMethodService.smali b/smali/org/fcitx/fcitx5/android/input/FcitxInputMethodService.smali
+--- a/smali/org/fcitx/fcitx5/android/input/FcitxInputMethodService.smali	2026-10-24 03:43:17.553995677 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/FcitxInputMethodService.smali	2026-11-03 01:17:56.208232647 +0000
+@@ -2842,6 +2842,8 @@
+ .method public final commitText(ILjava/lang/String;)V
+     .locals 7
+ 
++    invoke-static {p0}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->onTextCommitted(Ljava/lang/Object;)V
++
+     .line 1
+     invoke-virtual {p0}, Landroid/inputmethodservice/InputMethodService;->getCurrentInputConnection()Landroid/view/inputmethod/InputConnection;
+ 
+@@ -3703,6 +3705,8 @@
+     .line 24
+     aget p0, p0, v0
+ 
++    invoke-static {p0}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->onKeyboardTop(I)V
++
+     .line 25
+     .line 26
+     iput p0, p1, Landroid/inputmethodservice/InputMethodService$Insets;->contentTopInsets:I
+@@ -10283,6 +10287,8 @@
+     .line 1
+     invoke-super {p0, p1}, Landroid/inputmethodservice/InputMethodService;->setInputView(Landroid/view/View;)V
+ 
++    invoke-static {p0}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->setService(Landroid/inputmethodservice/InputMethodService;)V
++
+     .line 2
+     .line 3
+     .line 4
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/InputView.smali b/smali/org/fcitx/fcitx5/android/input/InputView.smali
+--- a/smali/org/fcitx/fcitx5/android/input/InputView.smali	2026-10-24 03:43:17.613995677 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/InputView.smali	2026-11-03 01:04:48.700232948 +0000
 @@ -615,7 +615,7 @@
  
      .line 234
@@ -22,9 +66,18 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
  
      .line 236
      .line 237
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+@@ -2845,6 +2845,8 @@
+     .line 51
+     move-result-object p0
+ 
++    invoke-static {p0}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->onInputPanel(Ljava/lang/Object;)V
++
+     .line 52
+     invoke-virtual {p0}, Lorg/fcitx/fcitx5/android/core/FcitxEvent$InputPanelEvent$Data;->getPreedit()Lorg/fcitx/fcitx5/android/core/FormattedText;
+ 
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/bar/KawaiiBarComponent$$ExternalSyntheticLambda3.smali b/smali/org/fcitx/fcitx5/android/input/bar/KawaiiBarComponent$$ExternalSyntheticLambda3.smali
+--- a/smali/org/fcitx/fcitx5/android/input/bar/KawaiiBarComponent$$ExternalSyntheticLambda3.smali	2026-10-24 03:43:17.645995677 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/bar/KawaiiBarComponent$$ExternalSyntheticLambda3.smali	2026-10-24 03:19:28.381996222 +0000
 @@ -337,6 +337,17 @@
      invoke-virtual {v1, p0}, Lorg/fcitx/fcitx5/android/input/keyboard/CustomGestureView;->setOnGestureListener(Lorg/fcitx/fcitx5/android/input/keyboard/CustomGestureView$OnGestureListener;)V
  
@@ -43,9 +96,58 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
      .line 148
      .line 149
      return-object v0
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent$adapter$2$1.smali b/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent$adapter$2$1.smali
+--- a/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent$adapter$2$1.smali	2026-10-24 03:43:18.193995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent$adapter$2$1.smali	2026-11-03 01:15:00.524232714 +0000
+@@ -215,6 +215,29 @@
+     .line 48
+     invoke-virtual {p2, v0}, Landroid/view/View;->setOnLongClickListener(Landroid/view/View$OnLongClickListener;)V
+ 
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->extraCandidate()Ljava/lang/Object;
++
++    move-result-object v0
++
++    if-eqz v0, :hw_no_override
++
++    iget v0, p1, Lorg/fcitx/fcitx5/android/input/candidates/CandidateViewHolder;->idx:I
++
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->extraIndex()I
++
++    move-result v1
++
++    if-ne v0, v1, :hw_no_override
++
++    iget-object v0, p1, Landroidx/recyclerview/widget/RecyclerView$ViewHolder;->itemView:Landroid/view/View;
++
++    invoke-static {}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->clickListener()Landroid/view/View$OnClickListener;
++
++    move-result-object v1
++
++    invoke-virtual {v0, v1}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
++
++    :hw_no_override
+     .line 49
+     .line 50
+     .line 51
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent.smali b/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent.smali
+--- a/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent.smali	2026-10-24 03:43:18.209995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent.smali	2026-11-03 01:15:00.524232714 +0000
+@@ -784,6 +784,12 @@
+     .line 118
+     move-result-object v1
+ 
++    invoke-static {v0}, Lorg/fcitx/fcitx5/android/mod/ModCalc;->decorate([Ljava/lang/Object;)[Ljava/lang/Object;
++
++    move-result-object v0
++
++    check-cast v0, [Lorg/fcitx/fcitx5/android/core/CandidateWord;
++
+     .line 119
+     iput-object v0, v1, Lorg/fcitx/fcitx5/android/input/candidates/horizontal/HorizontalCandidateComponent$adapter$2$1;->candidates:[Lorg/fcitx/fcitx5/android/core/CandidateWord;
+ 
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/keyboard/BaseKeyboard.smali b/smali/org/fcitx/fcitx5/android/input/keyboard/BaseKeyboard.smali
+--- a/smali/org/fcitx/fcitx5/android/input/keyboard/BaseKeyboard.smali	2026-10-24 03:43:18.573995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/keyboard/BaseKeyboard.smali	2026-10-24 03:46:08.429995611 +0000
 @@ -520,7 +520,7 @@
  
      .line 48
@@ -55,9 +157,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
  
      .line 50
      .line 51
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/keyboard/CapsKey.smali b/smali/org/fcitx/fcitx5/android/input/keyboard/CapsKey.smali
+--- a/smali/org/fcitx/fcitx5/android/input/keyboard/CapsKey.smali	2026-10-24 03:43:18.557995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/keyboard/CapsKey.smali	2026-10-24 04:30:58.497994585 +0000
 @@ -64,7 +64,7 @@
  
      const v4, 0x3dcccccd    # 0.1f
@@ -76,9 +178,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
  
      .line 28
      .line 29
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe.smali b/smali/org/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe.smali
+--- a/smali/org/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe.smali	2026-10-24 03:43:18.941995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/keyboard/KeyDef$Behavior$Swipe.smali	2026-10-24 03:46:08.429995611 +0000
 @@ -4,11 +4,11 @@
  
  
@@ -102,9 +204,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
  
      .line 5
      .line 6
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/keyboard/TextKeyboard.smali b/smali/org/fcitx/fcitx5/android/input/keyboard/TextKeyboard.smali
+--- a/smali/org/fcitx/fcitx5/android/input/keyboard/TextKeyboard.smali	2026-10-24 03:43:19.113995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/keyboard/TextKeyboard.smali	2026-10-24 03:46:24.481995605 +0000
 @@ -1268,44 +1268,15 @@
  
      .line 609
@@ -276,9 +378,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
  
      .line 691
      .line 692
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/picker/PickerLayout$Keyboard.smali b/smali/org/fcitx/fcitx5/android/input/picker/PickerLayout$Keyboard.smali
+--- a/smali/org/fcitx/fcitx5/android/input/picker/PickerLayout$Keyboard.smali	2026-10-24 03:43:19.157995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/picker/PickerLayout$Keyboard.smali	2026-10-24 04:21:45.829994796 +0000
 @@ -90,14 +90,14 @@
      const/4 v0, 0x1
  
@@ -296,9 +398,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
  
      .line 45
      .line 46
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/input/picker/PickerWindow$$ExternalSyntheticLambda0.smali b/smali/org/fcitx/fcitx5/android/input/picker/PickerWindow$$ExternalSyntheticLambda0.smali
+--- a/smali/org/fcitx/fcitx5/android/input/picker/PickerWindow$$ExternalSyntheticLambda0.smali	2026-10-24 03:43:19.249995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/input/picker/PickerWindow$$ExternalSyntheticLambda0.smali	2026-10-24 00:59:49.825999418 +0000
 @@ -496,36 +496,16 @@
  
      .line 229
@@ -340,9 +442,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
      goto/16 :goto_6
  
      .line 247
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient$startHoldSession$conn$1$onServiceConnected$cbBinder$1.smali b/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient$startHoldSession$conn$1$onServiceConnected$cbBinder$1.smali
+--- a/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient$startHoldSession$conn$1$onServiceConnected$cbBinder$1.smali	2026-10-24 03:43:19.761995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient$startHoldSession$conn$1$onServiceConnected$cbBinder$1.smali	2026-10-28 04:53:06.405919415 +0000
 @@ -245,6 +245,16 @@
      .line 101
      if-eq p1, p2, :cond_4
@@ -360,9 +462,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
      .line 102
      .line 103
      invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient.smali b/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient.smali
+--- a/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient.smali	2026-10-24 03:43:19.745995676 +0000
++++ b/smali/org/fcitx/fcitx5/android/link/AsrkbSpeechClient.smali	2026-10-28 04:53:06.437919415 +0000
 @@ -2560,6 +2560,20 @@
  .method public static toast(Landroid/content/Context;Ljava/lang/String;)V
      .locals 3
@@ -384,9 +486,9 @@ diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
      .line 1
      :try_start_0
      invoke-static {p0}, Landroidx/core/os/BundleCompat;->getMainExecutor(Landroid/content/Context;)Ljava/util/concurrent/Executor;
-diff -ruN '--label=a/smali' '--label=b/smali' a/smali b/smali
---- a/smali
-+++ b/smali
+diff -ruN a/smali/org/fcitx/fcitx5/android/mod/KeyFactory.smali b/smali/org/fcitx/fcitx5/android/mod/KeyFactory.smali
+--- a/smali/org/fcitx/fcitx5/android/mod/KeyFactory.smali	1970-01-01 00:00:00.000000000 +0000
++++ b/smali/org/fcitx/fcitx5/android/mod/KeyFactory.smali	2026-10-24 04:21:22.073994805 +0000
 @@ -0,0 +1,142 @@
 +.class public final Lorg/fcitx/fcitx5/android/mod/KeyFactory;
 +.super Ljava/lang/Object;

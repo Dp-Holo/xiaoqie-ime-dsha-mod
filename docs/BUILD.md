@@ -49,19 +49,9 @@ apksigner sign --ks mod.keystore --ks-pass pass:*** --key-pass pass:*** \
 apksigner verify release.apk && sha256sum release.apk
 ```
 
-## 4. 独立版（`com.dsha.xiaoqie.ime`）改名影响
+## 4. 关于改名版（已取消）
 
-独立版与兼容版内容相同，仅包名不同。改名涉及：
-
-| 位置 | 影响 |
-|---|---|
-| `AndroidManifest.xml` 的 `package` | 安装后与官方版共存 |
-| 自定义权限 `org.fcitx.fcitx5.android.permission.IPC` / `.PLUGIN` | 需同步改名 |
-| `FcitxDataProvider` 的 `authorities` | 需改为新包名下的 authority |
-| 数据/备份目录 | 变为 `Android/data/com.dsha.xiaoqie.ime/...`、`Android/media/com.dsha.xiaoqie.ime/backup` |
-| 插件（`org.fcitx.fcitx5.android.plugin.*`） | 插件按原包名交互，**独立版下不保证可用** |
-
-因此：独立版适合"只想试试、与官方版共存"；需要插件与官方数据完整兼容时请用兼容版。
+早期曾发布过包名为 `com.dsha.xiaoqie.ime` 的独立版，因 provider authority 未彻底改名、可与官方版冲突，**1.1.0 起取消**，只发布沿用官方包名的单一版本。
 
 ## 5. 发布物校验
 

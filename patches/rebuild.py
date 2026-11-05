@@ -3,6 +3,8 @@
 import struct, zlib, sys, zipfile
 
 SRC, NEWDEX, MODDEX, DST = sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4]
+MANIFEST = sys.argv[5] if len(sys.argv) > 5 and sys.argv[5] else None
+ARSC = sys.argv[6] if len(sys.argv) > 6 and sys.argv[6] else None
 ALIGN = 4
 
 def local_header(name, crc, csize, usize, method, extra):
@@ -30,6 +32,22 @@ def main():
             dex_count = 2
     # 追加模块 dex
     entries.append((f"classes{dex_count+1}.dex", moddex, zipfile.ZIP_DEFLATED))
+
+    if MANIFEST:
+        mf = open(MANIFEST, "rb").read()
+        for idx, e in enumerate(entries):
+            if e[0] == "AndroidManifest.xml":
+                entries[idx] = ("AndroidManifest.xml", mf, zipfile.ZIP_DEFLATED)
+                print("已替换 AndroidManifest.xml")
+                break
+
+    if ARSC:
+        ar = open(ARSC, "rb").read()
+        for idx, e in enumerate(entries):
+            if e[0] == "resources.arsc":
+                entries[idx] = ("resources.arsc", ar, zipfile.ZIP_STORED)
+                print("已替换 resources.arsc")
+                break
 
     out = bytearray()
     central = []
